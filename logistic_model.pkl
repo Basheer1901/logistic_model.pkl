@@ -1,21 +1,9 @@
-# Save the trained model
-with open('logistic_model.pkl', 'wb') as file:
-    pickle.dump(model, file)
-
-# Verify loading the model
-try:
-    with open('logistic_model.pkl', 'rb') as file:
-        loaded_model = pickle.load(file)
-    print("Model loaded successfully!")
-except Exception as e:
-    print(f"Error loading model: {e}")
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import load_iris  # Example dataset
 import pickle
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
-# Example: Using the Iris dataset (replace with your Titanic dataset)
+# Example: Using the Iris dataset
 data = load_iris()
 X = data.data
 y = data.target
@@ -26,3 +14,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Train the logistic regression model
 model = LogisticRegression(max_iter=200)
 model.fit(X_train, y_train)
+
+# Save the model to a file
+with open('logistic_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
